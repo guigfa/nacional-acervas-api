@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CardsModule } from './main/modules/cards.module';
-import { CardEntity } from './main/entities/Card.entity';
-import { SectionsModule } from './main/modules/sections.module';
+import { CardsModule } from './main/cards/cards.module';
+import { CardEntity } from './main/cards/entity/Card.entity';
+import { SectionsModule } from './main/sections/sections.module';
 
 @Module({
   imports: [

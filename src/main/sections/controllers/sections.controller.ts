@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpCode, HttpException, HttpStatus, Post } from "@nestjs/common";
-import { SectionsService } from "src/main/services/sections/sections.service";
+import { SectionsService } from "src/main/sections/services/sections.service";
 import { MessageHandler } from "src/shared/utils/message-handler";
 import { QueryFailedError } from "typeorm";
 

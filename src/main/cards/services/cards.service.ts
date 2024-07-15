@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CardEntity } from 'src/main/entities/Card.entity';
-import { Card } from 'src/shared/models/Card.model';
 import { MessageHandler } from 'src/shared/utils/message-handler';
 import { QueryFailedError, Repository } from 'typeorm';
-import { CardDTO } from './dtos/CardDTO';
+import { CardDTO } from '../dtos/CardDTO';
+import { CardEntity } from 'src/main/cards/entity/Card.entity';
+import { Card } from '../dtos/Card.model';
 
 @Injectable()
 export class CardsService {

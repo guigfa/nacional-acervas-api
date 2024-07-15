@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
-import { CardsService } from 'src/main/services/cards/cards.service';
-import { Card } from 'src/shared/models/Card.model';
+import { CardsService } from '../services/cards.service';
+import { Card } from '../dtos/Card.model';
 
 @Controller('cards')
 export class CardsController {
