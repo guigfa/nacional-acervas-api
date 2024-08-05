@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
-import { CardsService } from '../services/cards.service';
+import { CardsServiceImpl } from '../services/cardsImpl.service';
 import { Card } from '../dtos/Card.model';
 
 @Controller('cards')
 export class CardsController {
 
-    constructor(private service: CardsService) {}
+    constructor(private service: CardsServiceImpl) {}
 
     @Get()
     @HttpCode(200)

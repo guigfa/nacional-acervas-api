@@ -5,16 +5,17 @@ import { QueryFailedError, Repository } from 'typeorm';
 import { CardDTO } from '../dtos/CardDTO';
 import { CardEntity } from 'src/main/cards/entity/Card.entity';
 import { Card } from '../dtos/Card.model';
+import { CardServiceInterface } from './card.service';
 
 @Injectable()
-export class CardsService {
+export class CardsServiceImpl implements CardServiceInterface {
     constructor(@InjectRepository(CardEntity) private repository: Repository<CardEntity>){}
 
     public async getCards(): Promise<Card[]> {
       const cards = await this.repository
-      .createQueryBuilder('c')
-      .where('c.active = :active', { active: 1 }) 
-      .getMany();
+        .createQueryBuilder('c')
+        .where('c.active = :active', { active: 1 }) 
+        .getMany();
 
       return cards.map(card => ({
         href: card.href,
@@ -25,9 +26,9 @@ export class CardsService {
 
     public async getCardById(id: number): Promise<CardDTO> {
       const card = await this.repository.findOneBy({ id });
-      if (card) return new CardDTO(card);
+      if (!card) throw new HttpException('Erro ao buscar o card.', HttpStatus.NOT_FOUND);
       
-      throw new HttpException('Erro ao buscar o card.', HttpStatus.NOT_FOUND);
+      return new CardDTO(card);
     }
     
     async saveCard(card: Card): Promise<CardDTO> {
@@ -48,7 +49,7 @@ export class CardsService {
       try {
         card.active = true;
         await this.repository.update(id, card);
-        return await this.getCardById(id);
+        return card;
       } catch (error) {
         if (error instanceof QueryFailedError) {
           const errorMessage = MessageHandler.handleMessage('card', error);
